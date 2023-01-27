@@ -4,10 +4,10 @@ from rest_framework.serializers import ModelSerializer, Serializer
 from tools.models import Feature
 
 
-class FeatureSerializer(Serializer):
-    id = IntegerField()
-    name = CharField()
+class FeatureSerializer(ModelSerializer):
+    # id = IntegerField()
+    # name = CharField()
 
     class Meta:
-        # model = Feature
+        model = Feature
         fields = ('id', 'name')
