@@ -8,6 +8,7 @@ from tools.utils import get_top
 
 
 class FindToolView(APIView):
+    # authentication_classes =
     def post(self, request, *args, **kwargs):
         ser = TooPerfSerializer(data=self.request.data)
         ser.is_valid()
