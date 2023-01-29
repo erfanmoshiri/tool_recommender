@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import TextField
+from django.db.models import TextField, ManyToManyField
 
 from tools.models import BaseModel
 
@@ -13,4 +14,3 @@ class Tool(BaseModel):
         null=True
     )
     Description = TextField(null=True)
-
