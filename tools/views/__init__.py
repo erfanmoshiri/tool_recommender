@@ -6,3 +6,4 @@ from .register_user import RegisterUser
 from .login_user import LoginUser
 from .rate_tool_view import RateToolView
 from .get_recommend_view import GetRecommendView
+from .verify_code import VerifyCode

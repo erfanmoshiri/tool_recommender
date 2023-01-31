@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from tools.models import Recommend
+from tools.utils.recommender import add_to_cell
 
 
 class RateToolView(APIView):
@@ -11,9 +12,18 @@ class RateToolView(APIView):
             rec = Recommend.objects.get(id=pk)
         except:
             return Response('not found', status=status.HTTP_400_BAD_REQUEST)
+        if rec.user_id != request.user.id:
+            return Response('', status=status.HTTP_401_UNAUTHORIZED)
 
-        rec.liked = bool(request.query_params.get('rate', None))
+        rec.liked = bool(int(request.query_params.get('rate', None)))
         rec.save()
-        return Response(rec.liked, status=status.HTTP_200_OK)
+
+        success = add_to_cell(
+            rec.tool.id,
+            rec.feature.name,
+            rec.liked
+        )
+
+        return Response(success, status=status.HTTP_200_OK)
 
     pass

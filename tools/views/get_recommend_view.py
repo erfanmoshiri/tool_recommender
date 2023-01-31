@@ -9,4 +9,8 @@ class GetRecommendView(APIView):
     def get(self, request, *args, **kwargs):
         recommends = request.user.recommends.all()
         ser = RecommendSerializer(recommends, many=True)
-        return Response(ser.data, status=status.HTTP_200_OK)
+        data = {
+            'full_name': request.user.first_name,
+            'data': ser.data,
+        }
+        return Response(data, status=status.HTTP_200_OK)

@@ -6,42 +6,38 @@ import pandas as pd
 from tools.models import Feature
 
 
-# user_features = []
-
-
-# while(True):
-#     user_feature = input('Enter feature: ')
-#     user_features.append(user_feature)
-#     if user_feature == '':
-#         user_features.pop()
-#         break
 def add_to_cell(tool_id, feat_name, add=True):
-    curr_dir = os.getcwd()
-    here_dir = os.path.join(curr_dir, 'tools', 'utils', 'dataset.csv')
-    dataset = pd.read_csv(here_dir)
+    try:
+        curr_dir = os.getcwd()
+        here_dir = os.path.join(curr_dir, 'tools', 'utils', 'dataset.csv')
+        dataset = pd.read_csv(here_dir)
 
-    max = dataset._get_value(10, feat_name)
-    olds = []
-    for i in range(0, 10):
-        cell = dataset._get_value(i, feat_name)
-        old_val = cell * max
-        olds.append(old_val)
-    value = 1 if add else -1
-    olds[tool_id] += value
+        max = dataset._get_value(10, feat_name)
+        olds = []
+        for i in range(0, 10):
+            cell = dataset._get_value(i, feat_name)
+            old_val = cell * max
+            olds.append(old_val)
+        value = 1 if add else -1
+        olds[tool_id] += value
 
-    max = -1
-    max_i = -1
-    for i in range(0, 10):
-        cell = olds[i]
-        if cell > max:
-            max = cell
-            max_i = i
-    col_max = olds[max_i]
-    for j in range(0, 10):
-        c = olds[j]
-        c = c / col_max
-        dataset.loc[j, feat_name] = c
-    dataset.to_csv(here_dir, index=False)
+        max = -1
+        for i in range(0, 10):
+            cell = olds[i]
+            if cell > max:
+                max = cell
+                max_i = i
+        for j in range(0, 10):
+            c = olds[j]
+            c = c / max
+            dataset.loc[j, feat_name] = c
+        dataset.loc[10, feat_name] = max
+
+        dataset.to_csv(here_dir, index=False)
+    except:
+        return False
+    return True
+
 
 def edit_csv():
     curr_dir = os.getcwd()

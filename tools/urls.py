@@ -1,7 +1,7 @@
 from django.urls import path
 
 from tools.views import FindToolView, GetFeaturesView, GetToolsView, GetToolView, RegisterUser, LoginUser, RateToolView, \
-    GetRecommendView
+    GetRecommendView, VerifyCode
 
 urlpatterns = [
 
@@ -17,5 +17,6 @@ urlpatterns = [
 
     path('register/', RegisterUser.as_view()),
     path('login/', LoginUser.as_view()),
+    path('verify/', VerifyCode.as_view()),
 
 ]

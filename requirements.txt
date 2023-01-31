@@ -5,3 +5,6 @@ django-cors-headers>=3.13.0
 
 pandas
 numpy
+
+ghasedakpack
+requests
