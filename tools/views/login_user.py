@@ -19,8 +19,8 @@ class LoginUser(APIView):
         if not (user := ser.exists()):
             return Response('not found', status=status.HTTP_400_BAD_REQUEST)
 
-        c = random.randint(1000, 9999)
-        # c = 1111
+        # c = random.randint(1000, 9999)
+        c = 1111
         code = AuthCode.objects.create(code=c, user=user)
         send_code(user.username, c)
         return Response({'code_id': code.id}, status=status.HTTP_200_OK)
