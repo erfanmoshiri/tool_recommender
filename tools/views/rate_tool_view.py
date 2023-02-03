@@ -18,12 +18,12 @@ class RateToolView(APIView):
         rec.liked = bool(int(request.query_params.get('rate', None)))
         rec.save()
 
-        success = add_to_cell(
-            rec.tool.id,
-            rec.feature.name,
-            rec.liked
-        )
-
+        # success = add_to_cell(
+        #     rec.tool.id,
+        #     rec.feature.name,
+        #     rec.liked
+        # )
+        success = True
         return Response(success, status=status.HTTP_200_OK)
 
     pass
